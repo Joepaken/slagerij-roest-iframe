@@ -12,7 +12,7 @@ function escapeHtml(s: string): string {
 
 function offerBlock(o: Offer): string {
   return `<div class="offer-block">
-    <a class="card" href="${escapeHtml(o.productUrl)}" target="_top" rel="noopener">
+    <a class="card" href="${escapeHtml(o.productUrl)}" rel="noopener">
       <div class="card-body">
         <h2 class="day">${escapeHtml(o.day)}</h2>
         <p class="title">${escapeHtml(o.title)}</p>
@@ -140,7 +140,7 @@ export function renderFolderHtml(lastUpdated: string): string {
   </section>
 
   <footer class="meta">
-    Bron: <a href="${escapeHtml(BUSINESS.website)}" target="_top" rel="noopener">${escapeHtml(BUSINESS.businessName)}</a> · Bijgewerkt: ${escapeHtml(formatDutchDate(lastUpdated))}
+    Bron: <a href="${escapeHtml(BUSINESS.website)}" rel="noopener">${escapeHtml(BUSINESS.businessName)}</a> · Bijgewerkt: ${escapeHtml(formatDutchDate(lastUpdated))}
   </footer>
 </div>
 </body>
