@@ -10,9 +10,20 @@ function escapeHtml(s: string): string {
     .replace(/'/g, '&#39;');
 }
 
+function withUtm(rawUrl: string): string {
+  try {
+    const u = new URL(rawUrl);
+    if (!u.searchParams.has('utm_source')) u.searchParams.set('utm_source', 'noordwijkapp');
+    if (!u.searchParams.has('utm_medium')) u.searchParams.set('utm_medium', 'app');
+    return u.toString();
+  } catch {
+    return rawUrl;
+  }
+}
+
 function offerBlock(o: Offer): string {
   return `<div class="offer-block">
-    <a class="card" href="${escapeHtml(o.productUrl)}" rel="noopener">
+    <a class="card" href="${escapeHtml(withUtm(o.productUrl))}" rel="noopener">
       <div class="card-body">
         <h2 class="day">${escapeHtml(o.day)}</h2>
         <p class="title">${escapeHtml(o.title)}</p>
@@ -140,7 +151,7 @@ export function renderFolderHtml(lastUpdated: string): string {
   </section>
 
   <footer class="meta">
-    Bron: <a href="${escapeHtml(BUSINESS.website)}" rel="noopener">${escapeHtml(BUSINESS.businessName)}</a> · Bijgewerkt: ${escapeHtml(formatDutchDate(lastUpdated))}
+    Bron: <a href="${escapeHtml(withUtm(BUSINESS.website))}" rel="noopener">${escapeHtml(BUSINESS.businessName)}</a> · Bijgewerkt: ${escapeHtml(formatDutchDate(lastUpdated))}
   </footer>
 </div>
 </body>
